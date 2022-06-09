@@ -1,0 +1,500 @@
+#include<stdio.h>
+
+#include<stdlib.h>
+
+#include<string.h>
+
+char name[100],university[255],course[255],Enroll[100],flag=0;
+ int gt=0;
+
+ void firstsem();
+
+ void display();
+
+ void gotoxy(int x,int y)
+
+   {
+
+       printf("%c[%d;%df",0x1B,y,x);
+
+   }
+
+ /*
+void supply(char fsubject[5][100],)
+{
+  int i,f[5];
+   for(i=0;i<5;i++)
+   {
+     
+     f[i].total = 0;
+
+            if(f[i].T<17){
+            printf("Enter The Theory Marks out of 40 in %s\n",fsubject[i]);
+
+            strcpy(f[i].subject,fsubject[i]);
+
+            scanf("%d",&f[i].T);
+
+            f[i].total+=f[i].T;
+             
+            if(f[i].T<17){
+           
+             flag++;
+            f[i].ATKT=1;}}
+
+              if(f[i].P<8){
+               if(strcmp(fsubject[i],"C Lang.")==0)
+
+                {
+
+                 printf("Enter the Practical Marks out of 25 in C\n");
+
+                 scanf("%d",&f[i].P);
+
+                 f[i].total+=f[i].P;
+
+                // f[i].total+=f[i].T+f[i].P;
+
+                 if(f[i].P<8){
+
+                   flag++;
+                   f[i].ATKT=1;
+
+                   continue;}continue;
+
+                }}
+
+             if(f[i].I<4){
+             printf("Enter the Internal marks out of 10 in  %s\n",fsubject[i]);
+
+             scanf("%d",&f[i].I);
+
+             //f[i].total+=f[i].T+f[i].I;
+
+             f[i].total+=f[i].I;
+
+             if(f[i].I<4){
+             
+             flag++;
+             f[i].ATKT=1;}
+       
+     
+   }
+   
+}}
+*/
+
+typedef struct FirstYear{
+
+    char subject[100];
+
+    int max;
+
+    int T;
+
+    int P;
+
+    int I;
+
+    int obt;
+
+    int ATKT;
+
+    int total;
+
+}firstyear;
+firstyear f[5];
+void firstsem()
+
+{
+
+    int i;
+
+   
+
+    char fsubject[5][100]={"Fund of IT","Digital Electronics","C Lang.","Mathematics","English" };
+
+    //char fmax[5][20]={50,50,75,50,50};
+
+    for(i=0;i<5;i++)
+
+          {
+
+            //printf("Enter the Max marks of subject%s\n",fmax[i]);
+
+            //scanf("%d",f[i].max);
+
+            f[i].total = 0;
+
+            printf("Enter The Theory Marks out of 40 in %s\n",fsubject[i]);
+
+            strcpy(f[i].subject,fsubject[i]);
+
+            scanf("%d",&f[i].T);
+
+            f[i].total+=f[i].T;
+            if(strcmp(fsubject[i],"C Lang.")==0)
+            {
+
+               printf("Enter the Practical Marks out of 25 in C\n");
+               scanf("%d",&f[i].P);
+               f[i].total+=f[i].P;
+               // f[i].total+=f[i].T+f[i].P;
+               if(f[i].P < 8 || f[i].T < 17){
+                 flag++;
+                 f[i].ATKT=1;
+                 continue;
+               }
+              continue;  
+             }
+
+             printf("Enter the Internal marks out of 10 in  %s\n",fsubject[i]);
+
+             scanf("%d",&f[i].I);
+
+             //f[i].total+=f[i].T+f[i].I;
+
+             f[i].total+=f[i].I;
+
+             if(f[i].I<4 || f[i].T<17){
+                flag++;
+                f[i].ATKT=1;
+             }
+            }
+           
+            for(i=0;i<5;i++)
+            {  
+              gt=gt+f[i].total;
+            }
+
+            display();
+}
+
+void display()
+
+{
+
+    system("clear");
+
+    int j,i,check;
+
+    for(i=1;i<=40;i++)
+
+    {
+
+        for(j=1;j<=70;j++)
+        {
+         if(i==1)
+
+         {
+
+             gotoxy(j,i);
+
+             printf(".");
+
+         }
+
+         else if(j==1||j==70)
+
+         {
+
+             gotoxy(j,i);
+
+             printf(".");
+
+         }
+
+         else
+
+         {
+
+         gotoxy(j,i);
+
+         printf(" ");
+
+         }
+
+         if(i==20)
+
+         {
+
+             gotoxy(j,i);
+
+             printf(".");
+
+         }
+        }
+         
+
+      }
+
+   
+
+         /*else if(i==30)
+
+         {
+
+          gotoxy(j,i);
+
+          printf(".");
+
+         }*/
+
+   
+
+    gotoxy(20,2);
+
+    printf("%s",university);
+
+    gotoxy(17,3);
+
+    printf("%s",course);
+
+    gotoxy(5,5);
+
+    printf("Name: %s",name);
+
+    gotoxy(30,5);
+
+    printf("Enroll No:%s",Enroll);
+
+    for(i=1;i<=70;i++)
+
+    {
+
+       gotoxy(i,6);
+
+       printf(".");
+
+    }
+
+   
+
+       gotoxy(5,7);
+
+       printf("Subject");
+
+       gotoxy( 55,7);
+
+       printf("Max");
+
+       gotoxy(60,7);
+
+       printf("Obt");
+
+       gotoxy(26,7);
+
+       printf("T");
+
+       gotoxy(33,7);
+
+       printf("I");
+
+       gotoxy(41,7);
+
+       printf("P");
+
+       gotoxy(45,7);
+
+       printf("ATKT");
+
+       gotoxy(55,9);
+
+       printf("50");
+
+       gotoxy(55,10);
+
+       printf("50");
+
+       gotoxy(55,11);
+
+       printf("65");
+
+       gotoxy(55,12);
+
+       printf("50");
+
+       gotoxy(55,13);
+
+       printf("50");
+       
+       for(i=0;i<5;i++)
+       {
+         if(flag==1){
+            gotoxy(55,16);
+            printf("Result : ATKT");}
+         else if(flag>1){
+             gotoxy(55,16);
+            printf("Result : Fail");}
+         else{
+             gotoxy(55,16);
+            printf("Result : Pass"); }    
+       }
+       
+       gotoxy(8,16);
+       printf("Grand total %d/265",gt);
+
+    for(j=1;j<=70;j++)
+      {
+        gotoxy(j,14);
+        printf(".");
+      }
+   
+   
+    int x=5,y=9;
+
+    for(i=0;i<5;i++)
+
+    {
+
+        x=5;
+
+        gotoxy(x,y);
+
+        printf("%s",f[i].subject);
+
+        x=x+10;
+
+            gotoxy(x+3,y);
+
+           if(f[i].T>0&&f[i].T<=50)
+
+           printf("\t%d",f[i].T);
+
+           x=x+10;
+
+ 
+
+        gotoxy(x+3,y);
+
+        if(f[i].I>0&&f[i].I<=10)
+
+           printf("\t%d",f[i].I);
+
+        else
+
+          printf(" ");
+
+          x=x+10;
+
+       
+
+        gotoxy(x+3,y);
+
+        if(f[i].P>0&&f[i].P<=25)
+
+           printf("\t%d",f[i].P);
+
+        else
+
+           printf(" ");
+
+        if(f[i].ATKT==1)
+
+        {
+
+            x=x+10;
+
+            gotoxy(x,y);
+
+            printf("\033[0;31m");
+
+            printf("ATKT\n");
+
+             printf("\033[0m");
+
+        }
+
+        gotoxy(x+24,y);
+
+        printf("%d",f[i].total);
+
+        y++;
+
+           //printf("\n");
+
+    }
+
+     //int obt=0;
+
+   /*
+   if(flag>2){
+    gotoxy(1,72);
+    printf("for renter your marks press 0");
+    scanf("%d",&check);
+    if(check==0)
+    supply(fsubject);
+   }
+ */
+ gotoxy(1,74);
+ 
+
+
+}
+int checkForAtktExam(){
+  int i;
+  for(i=0; i<5; i++){
+    if(f[i].ATKT == 1){
+      gt -= f[i].T;
+      printf("Enter the marks of %s\n",f[i].subject);
+      scanf("%d",&f[i].T);
+      gt += f[i].T;
+      if(strcmp(f[i].subject,"C Lang.")==0){
+        gt -= f[i].P;
+        printf("Enter the practicle marks of %s",f[i].subject);
+        scanf("%d",&f[i].P);
+        gt += f[i].P;
+        if(f[i].T>17 && f[i].P>8){
+          flag--;
+          f[i].ATKT = 0;
+        }
+             
+        continue;
+      }
+      gt -= f[i].I;
+      printf("Enter Internal marks of %s",f[i].subject);
+      scanf("%d",&f[i].I);
+      gt += f[i].I;
+      if(f[i].T>17 && f[i].I>4){
+        flag--;
+        f[i].ATKT = 0;
+      }
+    }
+  }
+}
+int main()
+
+{
+
+    //char fmax[5][20]={50,50,75,50,50};
+
+    int i;
+
+    system("clear");
+
+   
+ 
+    printf("Enter University\n");
+
+    gets(university);
+
+    printf("Enter Course\n");
+
+    gets(course);
+
+    printf("Enter Name of Student \n");
+
+    gets(name);
+
+    printf("Enter Enroll:\n");
+
+    gets(Enroll);
+
+    firstsem();
+    while(flag){
+     checkForAtktExam();
+     display();
+    }
+    return 0;
+
+}
